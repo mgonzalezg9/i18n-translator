@@ -1,0 +1,13 @@
+{
+  "name": "i18n-translator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc main.ts dist/",
+    "start": "ts-node ./src/index.ts"
+  },
+  "author": "Manuel Gonzalez",
+  "license": "ISC"
+}
