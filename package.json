@@ -9,5 +9,11 @@
     "start": "ts-node ./src/index.ts"
   },
   "author": "Manuel Gonzalez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35"
+  }
 }

@@ -1,21 +1,24 @@
 import { isObject } from "../helpers";
+import { translate } from "../api/mock";
+import { TranslateObjFunc } from "../types";
 
-const translateString = (str: string, lang: string): string => {
-  return str + lang;
-};
+export const translateObject: TranslateObjFunc = async (obj, lang) => {
+  const keys = Object.keys(obj);
+  const promises: Promise<any>[] = [];
 
-export const translateObject = (
-  obj: Record<string, any>,
-  lang: string
-): Record<string, any> => {
-  const result: Record<string, any> = {};
-
-  Object.keys(obj).forEach((key) => {
-    const translateFunc = isObject(obj[key as keyof typeof obj])
+  // Solves each child
+  keys.forEach((k) => {
+    const translateFunc = isObject(obj[k as keyof typeof obj])
       ? translateObject
-      : translateString;
-    result[key] = translateFunc(obj[key as keyof typeof obj], lang);
+      : translate;
+    promises.push(translateFunc(obj[k as keyof typeof obj], lang));
   });
+  const solvedPromises = await Promise.all(promises);
 
+  // Combines the solved children
+  const result: Record<string, any> = {};
+  for (let i = 0; i < keys.length; i++) {
+    result[keys[i]] = solvedPromises[i];
+  }
   return result;
 };
