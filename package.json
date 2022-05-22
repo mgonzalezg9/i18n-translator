@@ -11,6 +11,7 @@
   "author": "Manuel Gonzalez",
   "license": "ISC",
   "dependencies": {
+    "bing-translate-api": "^2.6.0",
     "dotenv": "^16.0.1"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 import { isObject } from "../helpers";
-import { translate } from "../api/mock";
+import { translateStr } from "../api/bing";
 import { TranslateObjFunc } from "../types";
 
-export const translateObject: TranslateObjFunc = async (obj, lang) => {
+export const translateObject: TranslateObjFunc = async (obj, from, to) => {
   const keys = Object.keys(obj);
   const promises: Promise<any>[] = [];
 
@@ -10,8 +10,8 @@ export const translateObject: TranslateObjFunc = async (obj, lang) => {
   keys.forEach((k) => {
     const translateFunc = isObject(obj[k as keyof typeof obj])
       ? translateObject
-      : translate;
-    promises.push(translateFunc(obj[k as keyof typeof obj], lang));
+      : translateStr;
+    promises.push(translateFunc(obj[k as keyof typeof obj], from, to));
   });
   const solvedPromises = await Promise.all(promises);
 
