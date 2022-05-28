@@ -1,5 +1,5 @@
+import { translateStr } from "../api/local";
 import { isObject } from "../helpers";
-import { translateStr } from "../api/bing";
 import { TranslateObjFunc } from "../types";
 
 export const translateObject: TranslateObjFunc = async (obj, from, to) => {
