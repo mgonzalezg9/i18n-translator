@@ -1,4 +1,4 @@
-import { translateStr } from "../api/local";
+import { translateStr } from "../api/service";
 import { isObject } from "../helpers";
 import { TranslateObjFunc } from "../types";
 

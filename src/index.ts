@@ -2,24 +2,23 @@ import { translateObject } from "./translation";
 // import es from "../data/es.json";
 import test from "../data/test.json";
 import fs from "fs";
+import config from "./config";
 
-const to = "en";
-const from = "es";
-const outputFile = `./data/test.json`;
+const { TO, FROM, OUTPUT_FILE } = config;
 
 const start = Date.now();
-console.log(`Translating object to '${to}' from '${from}'...`);
+console.log(`Translating object to '${TO}' from '${FROM}'...`);
 
-translateObject(test, from, to)
+translateObject(test, FROM!, TO!)
   .then((res) => {
-    fs.writeFile(outputFile, JSON.stringify(res), (err: any) => {
+    fs.writeFile(OUTPUT_FILE!, JSON.stringify(res), (err: any) => {
       if (err) {
         console.error(err);
       }
     });
 
     const end = Date.now();
-    console.log(`Translated object taking ${end - start} ms`);
+    console.log(`Translated object in ${OUTPUT_FILE} taking ${end - start} ms`);
   })
   .catch((err) => {
     console.error("Error translating object", err);
