@@ -4,10 +4,14 @@ import test from "../data/test.json";
 import fs from "fs";
 import config from "./config";
 
-const { TO, FROM, OUTPUT_FILE } = config;
+const { TO, FROM, OUTPUT_FILE, SEQUENTIAL_VERSION } = config;
 
 const start = Date.now();
-console.log(`Translating object to '${TO}' from '${FROM}'...`);
+console.log(
+  `Translating object to '${TO}' from '${FROM}' using ${
+    SEQUENTIAL_VERSION ? "sequential" : "parallel"
+  } version...`
+);
 
 translateObject(test, FROM!, TO!)
   .then((res) => {
