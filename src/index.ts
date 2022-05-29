@@ -1,10 +1,13 @@
 import { translateObject } from "./translation";
-// import es from "../data/es.json";
-import test from "../data/test.json";
 import fs from "fs";
 import config from "./config";
 
-const { TO, FROM, OUTPUT_FILE, SEQUENTIAL_VERSION } = config;
+const { TO, FROM, INPUT_FILE, OUTPUT_FILE, SEQUENTIAL_VERSION } = config;
+
+if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
+  console.error("Missing config values");
+  process.exit(1);
+}
 
 const start = Date.now();
 console.log(
@@ -13,9 +16,10 @@ console.log(
   } version...`
 );
 
-translateObject(test, FROM!, TO!)
+const file = require(INPUT_FILE);
+translateObject(file, FROM, TO)
   .then((res) => {
-    fs.writeFile(OUTPUT_FILE!, JSON.stringify(res), (err: any) => {
+    fs.writeFile(OUTPUT_FILE, JSON.stringify(res), (err: any) => {
       if (err) {
         console.error(err);
       }
