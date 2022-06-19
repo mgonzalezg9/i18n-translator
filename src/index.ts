@@ -2,7 +2,7 @@ import { translateObject } from "./translation";
 import fs from "fs";
 import config from "./config";
 
-const { TO, FROM, INPUT_FILE, OUTPUT_FILE, SEQUENTIAL_VERSION } = config;
+const { TO, FROM, INPUT_FILE, OUTPUT_FILE, MAX_PARALLEL_QUERIES } = config;
 
 if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
   console.error("Missing config values");
@@ -11,9 +11,7 @@ if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
 
 const start = Date.now();
 console.log(
-  `Translating object to '${TO}' from '${FROM}' using ${
-    SEQUENTIAL_VERSION ? "sequential" : "parallel"
-  } version...`
+  `Translating object to '${TO}' from '${FROM}' having ${MAX_PARALLEL_QUERIES} simultaneous queries...`
 );
 
 const file = require(INPUT_FILE);
