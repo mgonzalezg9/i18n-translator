@@ -3,6 +3,8 @@ import config from "../config";
 import { TranslateStrFunc } from "../types";
 
 const SERVICE_URL = `${config.TRANSLATOR_URL}/translate`;
+let processed = 0;
+
 export const translateStr: TranslateStrFunc = async (str, from, to) => {
   try {
     const res = await axios.get(SERVICE_URL, {
@@ -21,5 +23,9 @@ export const translateStr: TranslateStrFunc = async (str, from, to) => {
   } catch (error) {
     console.error("Error translating string", str);
     return "";
+  } finally {
+    if (++processed % 2 === 0) {
+      console.log(`Processed ${processed} strings`);
+    }
   }
 };

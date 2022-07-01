@@ -11,5 +11,5 @@ export default {
   TEST_FILE: process.env.TEST_FILE,
   TEST_KEYS: process.env.TEST_KEYS,
   TEST_TEXT: process.env.TEST_TEXT,
-  SEQUENTIAL_VERSION: process.env.SEQUENTIAL_VERSION,
+  MAX_QUERIES_PER_LEVEL: parseInt(process.env.MAX_QUERIES_PER_LEVEL || "5"),
 };

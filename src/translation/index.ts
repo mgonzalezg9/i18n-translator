@@ -4,31 +4,33 @@ import { isObject } from "../helpers";
 import { TranslateObjFunc } from "../types";
 
 export const translateObject: TranslateObjFunc = async (obj, from, to) => {
-  const keys = Object.keys(obj);
+  const keys: (keyof typeof obj)[] = Object.keys(obj);
   const result: Record<string, any> = {};
-  const promises: Promise<any>[] = [];
+  let promises: { key: keyof typeof obj; promise: Promise<any> }[] = [];
 
-  if (config.SEQUENTIAL_VERSION) {
-    for (let i = 0; i < keys.length; i++) {
-      const k = keys[i];
-      const translateFunc = isObject(obj[k as keyof typeof obj])
-        ? translateObject
-        : translateStr;
-      result[k] = await translateFunc(obj[k as keyof typeof obj], from, to);
-    }
-  } else {
-    // Solves each child
-    keys.forEach((k) => {
-      const translateFunc = isObject(obj[k as keyof typeof obj])
-        ? translateObject
-        : translateStr;
-      promises.push(translateFunc(obj[k as keyof typeof obj], from, to));
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const translateFunc = isObject(obj[k]) ? translateObject : translateStr;
+
+    promises.push({
+      key: k,
+      promise: translateFunc(obj[k], from, to),
     });
-    const solvedPromises = await Promise.all(promises);
 
-    // Combines the solved children
-    for (let i = 0; i < keys.length; i++) {
-      result[keys[i]] = solvedPromises[i];
+    // We also must wait for the latests promises to finish
+    if (
+      promises.length === config.MAX_QUERIES_PER_LEVEL ||
+      keys.length - i > config.MAX_QUERIES_PER_LEVEL
+    ) {
+      const solvedPromises = await Promise.all(
+        promises.map(({ promise }) => promise)
+      );
+
+      // Combines the solved children
+      for (let j = 0; j < promises.length; j++) {
+        result[promises[j].key] = solvedPromises[j];
+      }
+      promises = [];
     }
   }
 
