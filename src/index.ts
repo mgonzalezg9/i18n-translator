@@ -2,19 +2,22 @@ import { translateObject } from "./translation";
 import fs from "fs";
 import config from "./config";
 
-const { TO, FROM, INPUT_FILE, OUTPUT_FILE, MAX_PARALLEL_QUERIES } = config;
+const { TO, FROM, INPUT_FILE, OUTPUT_FILE, MAX_QUERIES_PER_LEVEL } = config;
 
 if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
   console.error("Missing config values");
   process.exit(1);
 }
 
+const file = require(INPUT_FILE);
+
 const start = Date.now();
 console.log(
-  `Translating object to '${TO}' from '${FROM}' having ${MAX_PARALLEL_QUERIES} simultaneous queries...`
+  `Translating ${INPUT_FILE} (${
+    Object.keys(file).length
+  } keys) to '${TO}' from '${FROM}' having ${MAX_QUERIES_PER_LEVEL} queries per level...`
 );
 
-const file = require(INPUT_FILE);
 translateObject(file, FROM, TO)
   .then((res) => {
     fs.writeFile(OUTPUT_FILE, JSON.stringify(res), (err: any) => {

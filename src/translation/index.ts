@@ -12,13 +12,16 @@ export const translateObject: TranslateObjFunc = async (obj, from, to) => {
     const k = keys[i];
     const translateFunc = isObject(obj[k]) ? translateObject : translateStr;
 
-    result[k] = await translateFunc(obj[k], from, to);
     promises.push({
       key: k,
       promise: translateFunc(obj[k], from, to),
     });
 
-    if (promises.length === config.MAX_PARALLEL_QUERIES) {
+    // We also must wait for the latests promises to finish
+    if (
+      promises.length === config.MAX_QUERIES_PER_LEVEL ||
+      keys.length - i > config.MAX_QUERIES_PER_LEVEL
+    ) {
       const solvedPromises = await Promise.all(
         promises.map(({ promise }) => promise)
       );
