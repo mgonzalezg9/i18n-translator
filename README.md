@@ -34,7 +34,7 @@ Feel free of running the app using `npm start`.
 
 ## Test Generation
 
-You can generate a test file using the `npm run generate:test` command. Be sure of having the following keys added to your environment variables:
+You can generate a test file using the `npm run test:generate` command. Be sure of having the following keys added to your environment variables:
 
 ```
 TEST_FILE = THE_LOCATION_WHERE_YOUR_TEST_FILE_WILL_BE_PLACED
