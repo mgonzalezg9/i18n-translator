@@ -3,6 +3,7 @@ import config from "../config";
 import { TranslateStrFunc } from "../types";
 
 const SERVICE_URL = `${config.TRANSLATOR_URL}/translate`;
+const DEFAULT_PROVIDER = "deepl";
 let processed = 0;
 
 export const translateStr: TranslateStrFunc = async (str, from, to) => {
@@ -12,6 +13,7 @@ export const translateStr: TranslateStrFunc = async (str, from, to) => {
         query: str,
         source: from,
         target: to,
+        provider: DEFAULT_PROVIDER,
       },
     });
 

@@ -17,10 +17,11 @@ export const translateObject: TranslateObjFunc = async (obj, from, to) => {
       promise: translateFunc(obj[k], from, to),
     });
 
-    // We also must wait for the latests promises to finish
+    // We wait for the promises when we have enough of them or
+    // the remaining untranslated nodes are less than the max queries per level
     if (
       promises.length === config.MAX_QUERIES_PER_LEVEL ||
-      keys.length - i > config.MAX_QUERIES_PER_LEVEL
+      keys.length - i < config.MAX_QUERIES_PER_LEVEL
     ) {
       const solvedPromises = await Promise.all(
         promises.map(({ promise }) => promise)
