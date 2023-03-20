@@ -1,9 +1,7 @@
 import axios from "axios";
-import config from "../config";
+import { SERVICE_URL, DEFAULT_PROVIDER } from "../constants";
 import { TranslateStrFunc } from "../types";
 
-const SERVICE_URL = `${config.TRANSLATOR_URL}/translate`;
-const DEFAULT_PROVIDER = "deepl";
 let processed = 0;
 
 export const translateStr: TranslateStrFunc = async (str, from, to) => {

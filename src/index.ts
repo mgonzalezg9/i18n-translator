@@ -18,8 +18,10 @@ console.log(
   } keys) to '${TO}' from '${FROM}' having ${MAX_QUERIES_PER_LEVEL} queries per level...`
 );
 
-translateObject(file, FROM, TO)
-  .then((res) => {
+(async () => {
+  try {
+    const res = await translateObject(file, FROM, TO);
+
     fs.writeFile(OUTPUT_FILE, JSON.stringify(res), (err: any) => {
       if (err) {
         console.error(err);
@@ -28,7 +30,7 @@ translateObject(file, FROM, TO)
 
     const end = Date.now();
     console.log(`Translated object in ${OUTPUT_FILE} taking ${end - start} ms`);
-  })
-  .catch((err) => {
-    console.error("Error translating object", err);
-  });
+  } catch (error) {
+    console.error("Error translating object", error);
+  }
+})();
