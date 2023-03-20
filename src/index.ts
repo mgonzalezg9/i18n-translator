@@ -9,7 +9,7 @@ if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
   process.exit(1);
 }
 
-const file = require(INPUT_FILE);
+const file = require('../' + INPUT_FILE);
 
 const start = Date.now();
 console.log(

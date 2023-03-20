@@ -38,13 +38,14 @@ OUTPUT_FILE = YOUR_OUTPUT_FILE
 MAX_QUERIES_PER_LEVEL = MAXIMUM_NO_OF_QUERIES # Can be omitted, by default is 5
 ```
 
-Example:
+Notice all the paths are relative to the root of the project. 
+For example:
 
 ```env
 TRANSLATOR_URL = "http://localhost:3000"
 TO = "en"
 FROM = "es"
-INPUT_FILE = "../test/test.json"
+INPUT_FILE = "./test/test.json"
 OUTPUT_FILE = "./test/out.json"
 MAX_QUERIES_PER_LEVEL = 2
 ```
