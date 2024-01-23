@@ -1,9 +1,9 @@
 import { sleep } from "../helpers";
-import { TranslateStrFunc } from "../types";
+import { TSentence } from "./types";
 
 const MOCK_WAIT = 1000;
 
-export const translateStr: TranslateStrFunc = async () => {
+export const translateSentence: TSentence = async () => {
   sleep(MOCK_WAIT);
   return "foo";
 };

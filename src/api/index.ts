@@ -1,10 +1,10 @@
 import axios from "axios";
 import { SERVICE_URL, DEFAULT_PROVIDER } from "../constants";
-import { TranslateStrFunc } from "../types";
+import { TSentence } from "./types";
 
 let processed = 0;
 
-export const translateStr: TranslateStrFunc = async (str, from, to) => {
+export const translateSentence: TSentence = async (str, from, to) => {
   try {
     const res = await axios.get(SERVICE_URL, {
       params: {

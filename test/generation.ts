@@ -1,6 +1,11 @@
 import { writeFile } from "fs";
 import config from "../src/config";
 
+if (!config.TEST_KEYS) {
+  console.error("TEST_KEYS is not set in .env file");
+  process.exit(1);
+}
+
 // Script for generating JSON files
 let json: Record<number, string> = {};
 const KEY_NUMBER = parseInt(config.TEST_KEYS || "0");

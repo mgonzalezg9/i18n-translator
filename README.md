@@ -3,27 +3,21 @@
 - [I18n Translator](#i18n-translator)
   - [Introduction](#introduction)
   - [Installation](#installation)
-  - [Technologies](#technologies)
   - [Usage](#usage)
   - [Test Generation](#test-generation)
   - [Debugging](#debugging)
+  - [Translation API](#translation-api)
+  - [Technologies](#technologies)
 
 ## Introduction
 
-I18n Translator is a tool for translating your application into different languages. It is connected to my [i18n repository](https://github.com/mgonzalezg9/TranslatorScraper). However you can use the translation service you prefer, simply change `src/api/service.ts` calls to fit the Backend specifications.
+I18n Translator is a tool for translating your application into different languages. It is connected to my [i18n repository](https://github.com/mgonzalezg9/TranslatorScraper). However you can use the translation service you prefer, feel free to fork the project and change `src/api/service.ts` calls to fit the Backend specifications.
 
 ## Installation
 
 ```bash
 npm install
 ```
-
-## Technologies
-
-- [Axios](https://axios-http.com/es/docs/intro)
-- [Node.js](https://nodejs.org/)
-- [ts-node](https://www.npmjs.com/package/ts-node)
-- [TypeScript](https://www.typescriptlang.org/)
 
 ## Usage
 
@@ -72,4 +66,15 @@ TEST_TEXT = "Hola mundo"
 
 ## Debugging
 
-VS Code debugging is available through `.vscode/launch.json` file. This file requires ts-node to be either installed locally or globally with the module linked to this project. In order to link ts-node, you can run `npm link ts-node`.
+VS Code debugging is available through `.vscode/launch.json` file. This file requires `ts-node` to be either installed locally or globally with the module linked to this project. In order to link `ts-node`, you can run `npm link ts-node`.
+
+## Translation API
+
+Translation API errors will be translated as an empty string `""`. The object translation process is not stopped if query for a given key fails.
+
+## Technologies
+
+- [Axios](https://axios-http.com/es/docs/intro)
+- [Node.js](https://nodejs.org/)
+- [ts-node](https://www.npmjs.com/package/ts-node)
+- [TypeScript](https://www.typescriptlang.org/)

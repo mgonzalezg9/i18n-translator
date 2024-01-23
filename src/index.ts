@@ -9,12 +9,17 @@ if (!TO || !FROM || !INPUT_FILE || !OUTPUT_FILE) {
   process.exit(1);
 }
 
-const file = require('../' + INPUT_FILE);
+let file;
+try {
+  file = require('../' + INPUT_FILE);
+} catch (error) {
+  console.error('Unable to read file', INPUT_FILE);
+  process.exit(1);
+}
 
 const start = Date.now();
 console.log(
-  `Translating ${INPUT_FILE} (${
-    Object.keys(file).length
+  `Translating ${INPUT_FILE} (${Object.keys(file).length
   } keys) to '${TO}' from '${FROM}' having ${MAX_QUERIES_PER_LEVEL} queries per level...`
 );
 

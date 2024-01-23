@@ -1,16 +1,16 @@
-import { translateStr } from "../api/service";
+import { translateSentence } from "../api";
 import config from "../config";
 import { isObject } from "../helpers";
-import { TranslateObjFunc } from "../types";
+import { TObject } from "./types";
 
-export const translateObject: TranslateObjFunc = async (obj, from, to) => {
+export const translateObject: TObject = async (obj, from, to) => {
   const keys: (keyof typeof obj)[] = Object.keys(obj);
   const result: Record<string, any> = {};
   let promises: { key: keyof typeof obj; promise: Promise<any> }[] = [];
 
   for (let i = 0; i < keys.length; i++) {
     const k = keys[i];
-    const translateFunc = isObject(obj[k]) ? translateObject : translateStr;
+    const translateFunc = isObject(obj[k]) ? translateObject : translateSentence;
 
     promises.push({
       key: k,
