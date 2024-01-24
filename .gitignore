@@ -1,5 +1,4 @@
 data/
 .env
 node_modules
-test/test.json
-test/out.json
+test/*.json

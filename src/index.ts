@@ -1,6 +1,7 @@
 import { translateObject } from "./translation";
 import fs from "fs";
 import config from "./config";
+import { logError, logInfo, logSuccess } from "./logging";
 
 const { TO, FROM, INPUT_FILE, OUTPUT_FILE, MAX_QUERIES_PER_LEVEL } = config;
 
@@ -18,9 +19,9 @@ try {
 }
 
 const start = Date.now();
-console.log(
+logInfo(
   `Translating ${INPUT_FILE} (${Object.keys(file).length
-  } keys) to '${TO}' from '${FROM}' having ${MAX_QUERIES_PER_LEVEL} queries per level...`
+  } keys) to '${TO}' from '${FROM}' having ${MAX_QUERIES_PER_LEVEL} queries per level...\n`,
 );
 
 (async () => {
@@ -34,8 +35,8 @@ console.log(
     });
 
     const end = Date.now();
-    console.log(`Translated object in ${OUTPUT_FILE} taking ${end - start} ms`);
+    logSuccess(`\nTranslated object in ${OUTPUT_FILE} taking ${(end - start) / 1000} s`);
   } catch (error) {
-    console.error("Error translating object", error);
+    logError("Error translating object", error);
   }
 })();
