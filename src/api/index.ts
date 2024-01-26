@@ -3,7 +3,7 @@ import { SERVICE_URL, DEFAULT_PROVIDER } from "../constants";
 import { TSentence } from "./types";
 import { logTranslation } from "../logging";
 
-let processed = 0;
+let _processed = 0;
 
 export const translateSentence: TSentence = async (str, from, to) => {
   try {

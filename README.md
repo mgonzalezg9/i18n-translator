@@ -1,6 +1,6 @@
-# I18n Translator
+# i18n Translator
 
-- [I18n Translator](#i18n-translator)
+- [i18n Translator](#i18n-translator)
   - [Introduction](#introduction)
   - [Installation](#installation)
   - [Usage](#usage)
@@ -11,7 +11,7 @@
 
 ## Introduction
 
-I18n Translator is a tool for translating your application into different languages. It is connected to my [i18n repository](https://github.com/mgonzalezg9/TranslatorScraper). However you can use the translation service you prefer, feel free to fork the project and change `src/api/service.ts` calls to fit the Backend specifications.
+I18n Translator is a tool for translating your application into different languages. It is connected to my [i18n repository](https://github.com/mgonzalezg9/TranslatorScraper). However you can use the translation service you prefer, feel free to fork the project and change `src/api/service.ts` calls to fit your API specifications.
 
 ## Installation
 
@@ -44,7 +44,7 @@ OUTPUT_FILE = "./test/out.json"
 MAX_QUERIES_PER_LEVEL = 2
 ```
 
-Feel free of running the app using `npm start`.
+Feel free of running the app using `npm start`. The following [video](./video/simple_usage_video.mp4) illustrates its usage.
 
 ## Test Generation
 
